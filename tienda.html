@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Listo Solidario | Tienda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#ff6a00">
+</head>
+<body data-page="store">
+  <header class="main-header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <img src="assets/img/logoListo.png" alt="Logo Listo Solidario">
+        <span>Listo Solidario</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="tienda.html" class="nav-link active">Tienda</a>
+        <a href="impacto.html" class="nav-link">Impacto</a>
+        <a href="nosotros.html" class="nav-link">Nosotros</a>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+      </nav>
+
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú">
+        ☰
+      </button>
+
+      <a href="tienda.html" class="cart-link">
+        <span>Carrito</span>
+        <span id="cartCount" class="cart-count">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container store-grid">
+      <!-- LISTA DE PRODUCTOS -->
+      <section class="store-products">
+        <h1 class="section-title">Tienda solidaria</h1>
+        <p class="section-subtitle">
+          Agrega productos a tu carrito. El sistema irá calculando tu donación
+          según la opción que elijas.
+        </p>
+
+        <div id="productsGrid" class="products-grid">
+          <!-- Productos generados por JS -->
+        </div>
+      </section>
+
+      <!-- CARRITO Y DONACIÓN -->
+      <aside class="store-cart">
+        <h2>Tu carrito</h2>
+        <div id="emptyCartMessage" class="empty-cart">
+          Aún no has agregado productos. 💚
+        </div>
+
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cant.</th>
+              <th>Precio</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cartItems">
+            <!-- Items de carrito -->
+          </tbody>
+        </table>
+
+        <div class="cart-summary">
+          <p>Subtotal: <span class="amount">S/ <span id="cartSubtotal">0.00</span></span></p>
+
+          <div class="donation-box">
+            <h3>Elige cómo quieres donar</h3>
+
+            <label class="donation-option">
+              <input type="radio" name="donationMode" value="auto5" checked>
+              Donar automáticamente el 5% del total
+            </label>
+
+            <label class="donation-option">
+              <input type="radio" name="donationMode" value="fixed">
+              Donar un monto específico en dinero
+            </label>
+            <div id="fixedAmountWrapper" class="donation-extra hidden">
+              <input type="number" id="fixedDonationInput" min="0" step="0.5"
+                     placeholder="Ej. 5.00">
+            </div>
+
+            <label class="donation-option">
+              <input type="radio" name="donationMode" value="product">
+              Donar productos (menús solidarios)
+            </label>
+            <div id="productDonationWrapper" class="donation-extra hidden">
+              <input type="number" id="productDonationInput" min="0" step="1"
+                     placeholder="Cantidad de menús">
+              <small>Cada menú solidario tiene un valor de S/ 5.00</small>
+            </div>
+          </div>
+
+          <p>Donación: <span class="amount">S/ <span id="donationAmount">0.00</span></span></p>
+          <p class="cart-total">Total a pagar: <span class="amount strong">S/ <span id="cartTotal">0.00</span></span></p>
+
+          <button id="btnConfirmOrder" class="btn-primary full-width">
+            Confirmar pedido solidario
+          </button>
+          <p id="orderMessage" class="order-message"></p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <p>&copy; 2025 Listo Solidario – Comas.</p>
+      <p>Gracias por apoyar al Comedor Popular San Salvador.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+</body>
+</html>

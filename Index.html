@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Listo Solidario | Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#ff6a00">
+</head>
+<body data-page="home">
+  <header class="main-header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <img src="assets/img/logoListo.png" alt="Logo Listo Solidario">
+        <span>Listo Solidario</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link active">Inicio</a>
+        <a href="tienda.html" class="nav-link">Tienda</a>
+        <a href="impacto.html" class="nav-link">Impacto</a>
+        <a href="nosotros.html" class="nav-link">Nosotros</a>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+      </nav>
+
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú">
+        ☰
+      </button>
+
+      <a href="tienda.html" class="cart-link">
+        <span>Carrito</span>
+        <span id="cartCount" class="cart-count">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>Listo para ti,<br>Listo para Comas.</h1>
+          <p>
+            Compra rápido, seguro y solidario. Cada pedido en la tienda web
+            de Listo Solidario genera un apoyo directo al Comedor Popular
+            San Salvador en Comas.
+          </p>
+          <div class="hero-actions">
+            <a href="tienda.html" class="btn-primary">Ir a la tienda</a>
+            <a href="impacto.html" class="btn-outline">Ver impacto solidario</a>
+          </div>
+          <div class="hero-badges">
+            <span>Click &amp; Collect</span>
+            <span>Donación automática 5%</span>
+            <span>Transparencia en tiempo real</span>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="assets/img/banner-home.jpg" alt="Compra solidaria Listo">
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">¿Cómo funciona?</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>1. Elige tus productos</h3>
+            <p>Ingresa a la tienda, agrega tus productos favoritos al carrito y elige tu horario de recojo.</p>
+          </article>
+          <article class="card">
+            <h3>2. Decide cómo donar</h3>
+            <p>Elige si quieres donar un monto específico, productos solidarios o dejar que se done automáticamente el 5%.</p>
+          </article>
+          <article class="card">
+            <h3>3. Impacto real</h3>
+            <p>Cada compra suma al panel de impacto, donde se muestran platos servidos y familias beneficiadas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- LLAMADO -->
+    <section class="section section-highlight">
+      <div class="container highlight-grid">
+        <div>
+          <h2 class="section-title">Compra con propósito</h2>
+          <p>
+            Tu compra no solo resuelve tu día a día: también ayuda a que el comedor
+            tenga alimentos constantes para familias en situación de vulnerabilidad.
+          </p>
+        </div>
+        <div>
+          <ul class="feature-list">
+            <li>✔ Modelo Click &amp; Collect</li>
+            <li>✔ Donaciones transparentes</li>
+            <li>✔ Datos de impacto en tiempo real</li>
+            <li>✔ Foco local: Comas – Lima Norte</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <p>&copy; 2025 Listo Solidario – Comas.</p>
+      <p>Comedor Popular San Salvador · Comercio con propósito social.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+</body>
+</html>

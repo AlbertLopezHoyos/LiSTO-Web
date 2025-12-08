@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Listo Solidario | Contacto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#ff6a00">
+</head>
+<body data-page="contact">
+  <header class="main-header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <img src="assets/img/logoListo.png" alt="Logo Listo Solidario">
+        <span>Listo Solidario</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="tienda.html" class="nav-link">Tienda</a>
+        <a href="impacto.html" class="nav-link">Impacto</a>
+        <a href="nosotros.html" class="nav-link">Nosotros</a>
+        <a href="contacto.html" class="nav-link active">Contacto</a>
+      </nav>
+
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú">
+        ☰
+      </button>
+
+      <a href="tienda.html" class="cart-link">
+        <span>Carrito</span>
+        <span id="cartCount" class="cart-count">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container contact-grid">
+      <section>
+        <h1 class="section-title">Contacto y ayuda</h1>
+        <p class="section-subtitle">
+          Si tienes dudas sobre tu pedido, la donación o el funcionamiento de la
+          plataforma, completa el formulario y te responderemos.
+        </p>
+
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Simulación: mensaje enviado ✅');">
+          <label>
+            Nombre completo
+            <input type="text" required>
+          </label>
+
+          <label>
+            Correo electrónico
+            <input type="email" required>
+          </label>
+
+          <label>
+            Asunto
+            <input type="text" required>
+          </label>
+
+          <label>
+            Mensaje
+            <textarea rows="4" required></textarea>
+          </label>
+
+          <button type="submit" class="btn-primary">Enviar mensaje</button>
+        </form>
+      </section>
+
+      <aside>
+        <h2 class="section-title small">Preguntas frecuentes</h2>
+
+        <details class="faq-item" open>
+          <summary>¿Cómo funciona la donación automática del 5%?</summary>
+          <p>
+            Cuando eliges esta opción en la tienda, el sistema calcula el 5% del
+            subtotal de tu carrito y lo suma como donación solidaria.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Puedo elegir un monto específico para donar?</summary>
+          <p>
+            Sí, en la sección de donación puedes seleccionar "Donar un monto
+            específico" e ingresar la cantidad que deseas aportar.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Qué son los menús solidarios?</summary>
+          <p>
+            Son platos de comida que se financian con las donaciones. En el
+            simulador, cada menú solidario tiene un valor de S/ 5.00.
+          </p>
+        </details>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <p>&copy; 2025 Listo Solidario – Comas.</p>
+      <p>Gracias por ser parte del cambio.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+</body>
+</html>
