@@ -43,66 +43,233 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-text">
-          <h1>Listo para ti,<br>Listo para Comas.</h1>
-          <p>
-            Compra rápido, seguro y solidario. Cada pedido en la tienda web
-            de Listo Solidario genera un apoyo directo al Comedor Popular
-            San Salvador en Comas.
-          </p>
-          <div class="hero-actions">
-            <a href="tienda.html" class="btn-primary">Ir a la tienda</a>
-            <a href="impacto.html" class="btn-outline">Ver impacto solidario</a>
+          <div style="display:inline-flex;align-items:center;gap:.5rem;margin-bottom:.7rem;">
+            <span style="font-size:.75rem;padding:.2rem .7rem;border-radius:999px;background:rgba(255,106,0,0.08);color:#b45309;font-weight:600;">
+              🧡 Nuevo en Comas · Compra con propósito
+            </span>
           </div>
-          <div class="hero-badges">
-            <span>Click &amp; Collect</span>
-            <span>Donación automática 5%</span>
-            <span>Transparencia en tiempo real</span>
+
+          <h1>Listo para ti,<br>Listo para Comas.</h1>
+          <p class="mt-2">
+            Compra rápido, seguro y solidario. Cada pedido en Listo Solidario
+            genera un apoyo directo al <strong>Comedor Popular San Salvador</strong> en Comas.
+          </p>
+
+          <div class="hero-actions" style="margin-top:1.4rem;">
+            <a href="tienda.html" class="btn-primary">Empezar mi compra solidaria</a>
+            <a href="#como-funciona" class="btn-outline">Ver cómo funciona</a>
+          </div>
+
+          <div class="hero-badges" style="margin-top:1.2rem;">
+            <span>Click &amp; Collect sin colas</span>
+            <span>Donación automática del 5%</span>
+            <span>Pagos sencillos y locales</span>
+          </div>
+
+          <!-- Mini snapshot de impacto -->
+          <div class="card" style="margin-top:1.6rem;display:flex;align-items:center;gap:1rem;">
+            <div style="flex:1;">
+              <p class="muted" style="font-size:.8rem;margin-bottom:.15rem;">Impacto generado con Listo Solidario*</p>
+              <p style="font-size:1.1rem;font-weight:700;">
+                <span id="heroMeals">0</span> menús solidarios servidos
+              </p>
+              <p class="muted" style="font-size:.78rem;">*Datos simulados acumulados en tu navegador.</p>
+            </div>
+            <a href="impacto.html" class="btn-outline" style="white-space:nowrap;">Ver detalles</a>
           </div>
         </div>
+
         <div class="hero-image">
-          <img src="assets/img/banner-home.jpg" alt="Compra solidaria Listo">
+          <img src="assets/img/banner-home.jpg" alt="Compra solidaria Listo Solidario">
         </div>
       </div>
     </section>
 
-    <!-- BENEFICIOS -->
-    <section class="section">
+    <!-- MÉTRICAS EN TIEMPO CASI REAL -->
+    <section class="section" style="padding-top:1.5rem;">
+      <div class="container">
+        <h2 class="section-title">Tu ayuda se convierte en números reales</h2>
+        <p class="section-subtitle">
+          Cada compra registrada en la plataforma suma al impacto solidario. Aquí puedes ver un resumen
+          de lo que se ha logrado desde este navegador.
+        </p>
+
+        <div class="grid-3">
+          <article class="card impact-card" style="text-align:left;">
+            <p class="muted" style="font-size:.8rem;">Pedidos solidarios</p>
+            <p class="impact-number" id="homeOrders">0</p>
+            <p class="muted" style="font-size:.86rem;">Compras que ya se registraron como apoyo al comedor.</p>
+          </article>
+
+          <article class="card impact-card" style="text-align:left;">
+            <p class="muted" style="font-size:.8rem;">Donación acumulada</p>
+            <p class="impact-number">S/ <span id="homeDonation">0.00</span></p>
+            <p class="muted" style="font-size:.86rem;">Aporte solidario total (dinero y valor de menús).</p>
+          </article>
+
+          <article class="card impact-card" style="text-align:left;">
+            <p class="muted" style="font-size:.8rem;">Menús solidarios aproximados</p>
+            <p class="impact-number" id="homeMeals">0</p>
+            <p class="muted" style="font-size:.86rem;">Cada S/ 5 se transforma en un plato de comida para una familia.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="section" id="como-funciona">
       <div class="container">
         <h2 class="section-title">¿Cómo funciona?</h2>
+        <p class="section-subtitle">
+          En tres pasos conviertes tu compra diaria en un acto de solidaridad para familias de Comas.
+        </p>
+
         <div class="grid-3">
           <article class="card">
             <h3>1. Elige tus productos</h3>
-            <p>Ingresa a la tienda, agrega tus productos favoritos al carrito y elige tu horario de recojo.</p>
+            <p class="muted">
+              Entra a la <strong>tienda</strong>, agrega tus productos favoritos al carrito
+              y elige tu horario de recojo en la tienda Listo.
+            </p>
           </article>
+
           <article class="card">
             <h3>2. Decide cómo donar</h3>
-            <p>Elige si quieres donar un monto específico, productos solidarios o dejar que se done automáticamente el 5%.</p>
+            <p class="muted">
+              Elige si deseas <strong>donación automática del 5%</strong>,
+              donar un monto específico o aportar menús solidarios.
+            </p>
           </article>
+
           <article class="card">
-            <h3>3. Impacto real</h3>
-            <p>Cada compra suma al panel de impacto, donde se muestran platos servidos y familias beneficiadas.</p>
+            <h3>3. Impacto real y trazable</h3>
+            <p class="muted">
+              Cada pedido suma al panel de <strong>Impacto Solidario</strong>, donde podrás ver
+              platos servidos, donaciones acumuladas y familias beneficiadas.
+            </p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- LLAMADO -->
-    <section class="section section-highlight">
-      <div class="container highlight-grid">
-        <div>
-          <h2 class="section-title">Compra con propósito</h2>
-          <p>
-            Tu compra no solo resuelve tu día a día: también ayuda a que el comedor
-            tenga alimentos constantes para familias en situación de vulnerabilidad.
-          </p>
+    <!-- COMPRA CON PROPÓSITO -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <h2 class="section-title">Compra con propósito</h2>
+        <p class="section-subtitle">
+          Tu compra no solo resuelve tu día a día, también ayuda a que el comedor tenga
+          alimentos constantes para familias en situación de vulnerabilidad.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3>Modelo Click &amp; Collect</h3>
+            <p class="muted">
+              Pide desde tu celular, evita colas y recoge tus productos en el horario que mejor
+              se adapte a tu rutina. Ideal para quienes trabajan y tienen poco tiempo.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Donación transparente</h3>
+            <p class="muted">
+              Verás el detalle de tu aporte en el resumen del pedido y en la sección
+              de <strong>Impacto</strong>. Nada se pierde, todo queda registrado.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Foco local: Comas</h3>
+            <p class="muted">
+              Trabajamos directamente con el <strong>Comedor Popular San Salvador</strong>,
+              fortaleciendo el tejido social de Lima Norte y apoyando a nuestros propios vecinos.
+            </p>
+          </article>
         </div>
-        <div>
-          <ul class="feature-list">
-            <li>✔ Modelo Click &amp; Collect</li>
-            <li>✔ Donaciones transparentes</li>
-            <li>✔ Datos de impacto en tiempo real</li>
-            <li>✔ Foco local: Comas – Lima Norte</li>
-          </ul>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS / HISTORIAS -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <h2 class="section-title">Historias que inspiran</h2>
+        <p class="section-subtitle">
+          Detrás de cada pedido hay una familia que cocina mejor y otra que vuelve a tener un plato en la mesa.
+        </p>
+
+        <div class="grid-3">
+          <article class="card">
+            <p class="muted" style="font-size:.85rem;">
+              “Antes hacía cola casi una hora para comprar. Ahora reservo desde mi celular
+              y sé que, de paso, estoy ayudando a otra familia.”
+            </p>
+            <p style="margin-top:.7rem;font-weight:600;">María, vecina de Comas</p>
+          </article>
+
+          <article class="card">
+            <p class="muted" style="font-size:.85rem;">
+              “Gracias a las compras solidarias, el comedor puede planificar mejor y no
+              faltar alimentos en la semana.”
+            </p>
+            <p style="margin-top:.7rem;font-weight:600;">Equipo del Comedor San Salvador</p>
+          </article>
+
+          <article class="card">
+            <p class="muted" style="font-size:.85rem;">
+              “Es como hacer mi compra normal, pero con un plus: siento que mi carrito tiene
+              impacto real en mi propio distrito.”
+            </p>
+            <p style="margin-top:.7rem;font-weight:600;">Carlos, usuario frecuente</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ RÁPIDO (INTERACTIVO NATIVO) -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <h2 class="section-title">Preguntas rápidas</h2>
+        <p class="section-subtitle">
+          Resolvemos las dudas más comunes antes de que hagas tu primer pedido solidario.
+        </p>
+
+        <div class="card" style="display:flex;flex-direction:column;gap:.6rem;">
+          <details>
+            <summary style="cursor:pointer;font-weight:600;">¿Tengo que pagar algo extra por donar?</summary>
+            <p class="muted" style="margin-top:.3rem;">
+              No necesariamente. Puedes dejar que el sistema done automáticamente el 5% de tu compra
+              o elegir tú el monto o número de menús solidarios. Todo es voluntario.
+            </p>
+          </details>
+
+          <details>
+            <summary style="cursor:pointer;font-weight:600;">¿Cómo sé que mi donación llega al comedor?</summary>
+            <p class="muted" style="margin-top:.3rem;">
+              El panel de <strong>Impacto</strong> muestra estadísticas acumuladas de pedidos y donaciones,
+              y el comedor registra de forma periódica los menús servidos gracias a la plataforma.
+            </p>
+          </details>
+
+          <details>
+            <summary style="cursor:pointer;font-weight:600;">¿Puedo usar solo efectivo?</summary>
+            <p class="muted" style="margin-top:.3rem;">
+              Sí. Puedes pagar en efectivo al momento del recojo y aun así tu pedido cuenta como
+              compra solidaria dentro del sistema.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="card" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+          <div>
+            <h2 style="margin-bottom:.3rem;">¿Listo para sumar tu primer pedido solidario?</h2>
+            <p class="muted">En menos de 2 minutos puedes armar tu carrito y apoyar al comedor de tu barrio.</p>
+          </div>
+          <a href="tienda.html" class="btn-primary">Ir a la tienda ahora</a>
         </div>
       </div>
     </section>
@@ -117,5 +284,24 @@
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/cart.js"></script>
+
+  <!-- Script pequeño para leer stats de cart.js y poblar las métricas del home -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof loadStats === "function") {
+        const stats = loadStats();
+        const ordersEl = document.getElementById("homeOrders");
+        const donationEl = document.getElementById("homeDonation");
+        const mealsEl = document.getElementById("homeMeals");
+        const heroMealsEl = document.getElementById("heroMeals");
+
+        if (ordersEl) ordersEl.textContent = stats.orders || 0;
+        if (donationEl) donationEl.textContent = (stats.donation || 0).toFixed(2);
+        const meals = Math.floor(stats.meals || 0);
+        if (mealsEl) mealsEl.textContent = meals;
+        if (heroMealsEl) heroMealsEl.textContent = meals;
+      }
+    });
+  </script>
 </body>
 </html>

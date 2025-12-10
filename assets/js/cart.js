@@ -1,3 +1,5 @@
+// assets/js/cart.js
+
 // Datos de productos (para evitar problemas de fetch en file://)
 const PRODUCTS = [
   {
@@ -5,65 +7,56 @@ const PRODUCTS = [
     name: "Menú del día",
     price: 10.0,
     description: "Plato casero completo del Comedor Popular.",
-    image: "assets/img/productos/menu-dia.jpg"
+    image: "assets/img/productos/menu-dia.jpg",
   },
   {
     id: "p2",
     name: "Pan artesanal",
     price: 3.0,
     description: "Pan recién horneado, ideal para el desayuno.",
-    image: "assets/img/productos/pan-artesanal.jpg"
+    image: "assets/img/productos/pan-artesanal.jpg",
   },
   {
     id: "p3",
     name: "Postre casero",
     price: 4.5,
     description: "Postres preparados en el comedor, variedad del día.",
-    image: "assets/img/productos/postre-casero.jpg"
+    image: "assets/img/productos/postre-casero.jpg",
   },
   {
     id: "p4",
     name: "Pack despensa",
     price: 25.0,
     description: "Arroz, menestras y aceite para la semana.",
-    image: "assets/img/productos/pack-despensa.jpg"
+    image: "assets/img/productos/pack-despensa.jpg",
   },
   {
     id: "p5",
     name: "Plato para llevar",
     price: 8.0,
     description: "Ración para llevar y consumir luego.",
-    image: "assets/img/productos/plato-llevar.jpg"
+    image: "assets/img/productos/plato-llevar.jpg",
   },
   {
     id: "p6",
     name: "Menú solidario",
     price: 5.0,
     description: "Aporta directamente a un plato solidario.",
-    image: "assets/img/productos/menu-solidario.jpg"
-  }
+    image: "assets/img/productos/menu-solidario.jpg",
+  },
 ];
 
 const STORAGE_KEYS = {
   CART: "ls_cart",
   DONATION: "ls_donation",
-  STATS: "ls_stats"
+  STATS: "ls_stats",
 };
 
 document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page;
 
   if (page === "store") {
-    // Si no hay carrito guardado, iniciamos vacío una sola vez
-    if (!localStorage.getItem(STORAGE_KEYS.CART)) {
-      saveCart([]);
-    }
-
-    renderProducts();
-    renderCart();
-    setupCartInteractions();
-    setupDonationControls();
-    setupConfirmOrder();
+    initStorePage();
   }
 
   if (page === "impact") {
@@ -71,13 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* Utilidades de carrito */
+/* ============= UTILIDADES DE CARRITO ============= */
 
 function loadCart() {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.CART);
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
+    return raw ? JSON.parse(raw) : [];
   } catch {
     return [];
   }
@@ -85,8 +77,9 @@ function loadCart() {
 
 function saveCart(cart) {
   localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
+  // updateCartCount está definido en main.js
   if (typeof window.updateCartCount === "function") {
-    window.updateCartCount(); // de main.js
+    window.updateCartCount();
   }
 }
 
@@ -94,7 +87,21 @@ function findProduct(id) {
   return PRODUCTS.find((p) => p.id === id);
 }
 
-/* Render de productos en tienda */
+function calcSubtotal(cart) {
+  return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+/* ============= INICIALIZACIÓN DE LA PÁGINA TIENDA ============= */
+
+function initStorePage() {
+  renderProducts();
+  setupCartListeners();      // listeners del tbody solo UNA vez
+  setupDonationControls();   // radios y inputs de donación
+  setupConfirmOrder();       // botón de confirmar
+  renderCart();              // pintar carrito inicial
+}
+
+/* ============= RENDER DE PRODUCTOS ============= */
 
 function renderProducts() {
   const grid = document.getElementById("productsGrid");
@@ -119,6 +126,7 @@ function renderProducts() {
     grid.appendChild(card);
   });
 
+  // Delegación de eventos para los botones "Agregar al carrito"
   grid.addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-product-id]");
     if (!btn) return;
@@ -127,7 +135,7 @@ function renderProducts() {
   });
 }
 
-/* Gestión de carrito */
+/* ============= GESTIÓN DE CARRITO ============= */
 
 function addToCart(productId) {
   const product = findProduct(productId);
@@ -143,7 +151,7 @@ function addToCart(productId) {
       id: product.id,
       name: product.name,
       price: product.price,
-      quantity: 1
+      quantity: 1,
     });
   }
 
@@ -174,11 +182,30 @@ function updateQuantity(productId, newQty) {
   }
 }
 
-function calcSubtotal(cart) {
-  return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+/* ============= LISTENERS DEL CARRITO (CAMBIO / ELIMINAR) ============= */
+
+function setupCartListeners() {
+  const tbody = document.getElementById("cartItems");
+  if (!tbody) return;
+
+  // Cambios en la cantidad
+  tbody.addEventListener("change", (e) => {
+    const input = e.target.closest("input[data-cart-id]");
+    if (!input) return;
+    const id = input.getAttribute("data-cart-id");
+    updateQuantity(id, input.value);
+  });
+
+  // Eliminar ítems
+  tbody.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-remove-id]");
+    if (!btn) return;
+    const id = btn.getAttribute("data-remove-id");
+    removeFromCart(id);
+  });
 }
 
-/* Render carrito + totales */
+/* ============= RENDER DEL CARRITO + TOTALES ============= */
 
 function renderCart() {
   const tbody = document.getElementById("cartItems");
@@ -200,15 +227,29 @@ function renderCart() {
 
   cart.forEach((item) => {
     const tr = document.createElement("tr");
+    tr.className = "cart-row";
     tr.innerHTML = `
-      <td>${item.name}</td>
-      <td>
-        <input type="number" min="1" class="cart-qty" value="${item.quantity}"
-               data-cart-id="${item.id}">
+      <td class="cart-item-name">
+        <span>${item.name}</span>
       </td>
-      <td>S/ ${(item.price * item.quantity).toFixed(2)}</td>
       <td>
-        <button class="cart-remove-btn" data-remove-id="${item.id}">&times;</button>
+        <div class="cart-qty-wrapper">
+          <input
+            type="number"
+            min="1"
+            class="cart-qty"
+            value="${item.quantity}"
+            data-cart-id="${item.id}"
+          >
+        </div>
+      </td>
+      <td class="cart-item-price">
+        S/ ${(item.price * item.quantity).toFixed(2)}
+      </td>
+      <td class="cart-item-action">
+        <button class="cart-remove-btn" data-remove-id="${item.id}" aria-label="Quitar">
+          &times;
+        </button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -223,30 +264,7 @@ function renderCart() {
   totalSpan.textContent = (subtotal + donation).toFixed(2);
 }
 
-/* Delegación de eventos del carrito (solo se configura una vez) */
-
-function setupCartInteractions() {
-  const tbody = document.getElementById("cartItems");
-  if (!tbody) return;
-
-  // Cambio de cantidad
-  tbody.addEventListener("change", (e) => {
-    const input = e.target.closest("input[data-cart-id]");
-    if (!input) return;
-    const id = input.getAttribute("data-cart-id");
-    updateQuantity(id, input.value);
-  });
-
-  // Eliminar producto
-  tbody.addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-remove-id]");
-    if (!btn) return;
-    const id = btn.getAttribute("data-remove-id");
-    removeFromCart(id);
-  });
-}
-
-/* Donación */
+/* ============= DONACIÓN ============= */
 
 function getDonationMode() {
   const radios = document.querySelectorAll('input[name="donationMode"]');
@@ -327,7 +345,7 @@ function setupDonationControls() {
   refreshVisibility();
 }
 
-/* Confirmar pedido: actualiza stats y limpia carrito */
+/* ============= CONFIRMAR PEDIDO ============= */
 
 function setupConfirmOrder() {
   const btn = document.getElementById("btnConfirmOrder");
@@ -339,7 +357,9 @@ function setupConfirmOrder() {
     if (cart.length === 0) {
       if (msg) {
         msg.style.color = "crimson";
-        msg.textContent = "Tu carrito está vacío. Agrega productos antes de confirmar.";
+        msg.textContent =
+          "Tu carrito está vacío. Agrega productos antes de confirmar.";
+        msg.classList.add("order-message-visible");
       }
       return;
     }
@@ -358,12 +378,13 @@ function setupConfirmOrder() {
     if (msg) {
       msg.style.color = "#0c7c59";
       msg.textContent =
-        "Pedido solidario registrado (simulado). Gracias por tu apoyo 💚";
+        "Pedido solidario registrado (simulado). ¡Gracias por tu apoyo 💚!";
+      msg.classList.add("order-message-visible");
     }
   });
 }
 
-/* Impacto: estadísticas acumuladas */
+/* ============= IMPACTO: ESTADÍSTICAS ACUMULADAS ============= */
 
 function loadStats() {
   try {
@@ -373,7 +394,7 @@ function loadStats() {
         orders: 0,
         sales: 0,
         donation: 0,
-        meals: 0
+        meals: 0,
       };
     }
     return JSON.parse(raw);
@@ -382,7 +403,7 @@ function loadStats() {
       orders: 0,
       sales: 0,
       donation: 0,
-      meals: 0
+      meals: 0,
     };
   }
 }

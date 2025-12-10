@@ -38,57 +38,141 @@
     </div>
   </header>
 
-  <main class="section">
-    <div class="container">
-      <h1 class="section-title">Impacto solidario</h1>
-      <p class="section-subtitle">
-        Aquí se resume el impacto generado por tus pedidos confirmados.
-        Los datos se guardan en tu navegador (localStorage) como un simulador del panel real.
-      </p>
+  <main>
+    <!-- Hero impacto -->
+    <section class="section impact-hero">
+      <div class="container impact-hero-grid">
+        <div>
+          <h1>Tu compra tiene impacto real 🌱</h1>
+          <p>
+            Cada pedido registrado en la plataforma se convierte en <strong>ventas para el comedor</strong>
+            y en <strong>platos solidarios</strong> para familias de Comas. Aquí puedes ver el impacto
+            acumulado en esta demo.
+          </p>
 
-      <div class="grid-3 impact-grid">
+          <ul class="impact-bullets">
+            <li>✔ Pedidos solidarios registrados en el navegador.</li>
+            <li>✔ Monto total vendido a través de la tienda.</li>
+            <li>✔ Donaciones generadas automáticamente o de forma manual.</li>
+            <li>✔ Cantidad aproximada de menús solidarios financiados.</li>
+          </ul>
+        </div>
+
+        <div class="card impact-hero-card">
+          <h2>Resumen en tiempo real</h2>
+          <div class="impact-summary-grid">
+            <div class="impact-summary-item">
+              <span class="impact-label">Pedidos</span>
+              <span class="impact-number" id="impactOrders">0</span>
+            </div>
+            <div class="impact-summary-item">
+              <span class="impact-label">Ventas (S/)</span>
+              <span class="impact-number" id="impactSales">0.00</span>
+            </div>
+            <div class="impact-summary-item">
+              <span class="impact-label">Donado (S/)</span>
+              <span class="impact-number" id="impactDonation">0.00</span>
+            </div>
+            <div class="impact-summary-item">
+              <span class="impact-label">Menús solidarios</span>
+              <span class="impact-number" id="impactMeals">0</span>
+            </div>
+          </div>
+          <p class="impact-note">
+            *Los datos se guardan en tu navegador como parte de la simulación del proyecto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detalle visual del impacto -->
+    <section class="section">
+      <div class="container impact-grid">
         <article class="card impact-card">
-          <h2>Pedidos solidarios</h2>
-          <p class="impact-number" id="impactOrders">0</p>
-          <p class="impact-label">Pedidos confirmados</p>
+          <h2>¿Cómo se convierte tu compra en ayuda?</h2>
+          <ol class="impact-steps">
+            <li>Realizas un pedido en la tienda solidaria.</li>
+            <li>Eliges cómo donar: 5 %, monto fijo o menús solidarios.</li>
+            <li>La plataforma registra el aporte y lo suma al impacto total.</li>
+            <li>El comedor utiliza esos recursos para preparar más platos.</li>
+          </ol>
         </article>
 
         <article class="card impact-card">
-          <h2>Ventas acumuladas</h2>
-          <p class="impact-number">S/ <span id="impactSales">0.00</span></p>
-          <p class="impact-label">Monto total de compras</p>
+          <h2>Distribución simbólica</h2>
+          <p class="muted">
+            Esta barra representa, de forma visual, el equilibrio entre ventas y donaciones
+            tomando como referencia el historial guardado en tu navegador.
+          </p>
+
+          <div class="impact-bar">
+            <div class="impact-bar-sales" id="impactBarSales"></div>
+            <div class="impact-bar-donations" id="impactBarDonations"></div>
+          </div>
+
+          <div class="impact-legend">
+            <span><span class="legend-box legend-sales"></span> Ventas</span>
+            <span><span class="legend-box legend-donations"></span> Donaciones</span>
+          </div>
         </article>
 
         <article class="card impact-card">
-          <h2>Donaciones acumuladas</h2>
-          <p class="impact-number">S/ <span id="impactDonation">0.00</span></p>
-          <p class="impact-label">Monto total donado</p>
+          <h2>Historias que queremos contar</h2>
+          <p>
+            La meta de Listo Solidario es que cada cifra no se quede solo en un número,
+            sino que se traduzca en historias: niños que almuerzan todos los días,
+            adultos mayores que no se saltan comidas y familias que sienten el respaldo
+            de su propia comunidad.
+          </p>
+          <p>
+            A medida que el proyecto crezca, este panel podría mostrar testimonios,
+            fotos y reportes descargables del impacto real generado.
+          </p>
         </article>
       </div>
-
-      <section class="section">
-        <h2 class="section-title">Platos solidarios estimados</h2>
-        <p class="section-subtitle">
-          Considerando que cada menú solidario tiene un costo de S/ 5.00, se
-          estima la cantidad de platos que podrían financiarse con las donaciones.
-        </p>
-
-        <div class="card impact-card-wide">
-          <p class="impact-number" id="impactMeals">0</p>
-          <p class="impact-label">Platos solidarios estimados</p>
-        </div>
-      </section>
-    </div>
+    </section>
   </main>
 
   <footer class="main-footer">
     <div class="container footer-grid">
       <p>&copy; 2025 Listo Solidario – Comas.</p>
-      <p>Transparencia y compromiso con la comunidad.</p>
+      <p>Gracias por apoyar al Comedor Popular San Salvador.</p>
     </div>
   </footer>
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/cart.js"></script>
+  <script>
+    // Ajustar barra de distribución ventas / donaciones
+    (function () {
+      function updateBars() {
+        try {
+          const raw = localStorage.getItem('ls_stats');
+          const stats = raw ? JSON.parse(raw) : null;
+          const sales = stats ? stats.sales || 0 : 0;
+          const donation = stats ? stats.donation || 0 : 0;
+          const total = sales + donation || 1;
+
+          const salesPct = (sales / total) * 100;
+          const donationPct = (donation / total) * 100;
+
+          const barSales = document.getElementById('impactBarSales');
+          const barDonations = document.getElementById('impactBarDonations');
+
+          if (barSales && barDonations) {
+            barSales.style.width = salesPct + '%';
+            barDonations.style.width = donationPct + '%';
+          }
+        } catch (e) {
+          console.error('Error leyendo stats para la barra de impacto', e);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', updateBars);
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'ls_stats') updateBars();
+      });
+    })();
+  </script>
 </body>
 </html>

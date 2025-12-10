@@ -40,76 +40,171 @@
 
   <main class="section">
     <div class="container contact-grid">
-      <section>
-        <h1 class="section-title">Contacto y ayuda</h1>
+      <!-- Columna izquierda: info + FAQ -->
+      <section class="card contact-info">
+        <h1 class="section-title">Hablemos 💬</h1>
         <p class="section-subtitle">
-          Si tienes dudas sobre tu pedido, la donación o el funcionamiento de la
-          plataforma, completa el formulario y te responderemos.
+          ¿Tienes dudas sobre tu pedido, las donaciones o quieres sumar a tu
+          organización al proyecto? Escríbenos y coordinamos contigo.
         </p>
 
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Simulación: mensaje enviado ✅');">
-          <label>
-            Nombre completo
-            <input type="text" required>
-          </label>
+        <div class="contact-items">
+          <div class="contact-item">
+            <span class="contact-icon">📱</span>
+            <div>
+              <h3>WhatsApp</h3>
+              <p>+51 900 000 000</p>
+              <small>Atención de lunes a sábado, 9:00 a.m. – 7:00 p.m.</small>
+            </div>
+          </div>
 
-          <label>
-            Correo electrónico
-            <input type="email" required>
-          </label>
+          <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            <div>
+              <h3>Correo electrónico</h3>
+              <p>contacto@listosolidario.pe</p>
+              <small>En menos de 24 horas respondemos tu mensaje.</small>
+            </div>
+          </div>
 
-          <label>
-            Asunto
-            <input type="text" required>
-          </label>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <h3>Zona de operación</h3>
+              <p>Comas, Lima Norte</p>
+              <small>Radio aproximado de 2 km alrededor del Comedor San Salvador.</small>
+            </div>
+          </div>
+        </div>
 
-          <label>
-            Mensaje
-            <textarea rows="4" required></textarea>
-          </label>
+        <div class="faq-block">
+          <h2>Preguntas rápidas</h2>
 
-          <button type="submit" class="btn-primary">Enviar mensaje</button>
-        </form>
+          <div class="faq-item">
+            <button type="button" class="faq-question">
+              ¿Cómo se calcula mi donación?
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Puedes elegir entre una donación automática del 5 %,
+                un monto fijo en soles o donar menús solidarios.
+                Todo se refleja en el panel de impacto.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question">
+              ¿Puedo visitar el comedor?
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Sí. Coordinamos visitas guiadas para mostrar cómo se usan
+                los recursos y qué familias se benefician del proyecto.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question">
+              ¿Empresas pueden sumarse al modelo?
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Por supuesto. Podemos diseñar campañas especiales donde
+                parte de las ventas de tu negocio financien platos solidarios.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <aside>
-        <h2 class="section-title small">Preguntas frecuentes</h2>
+      <!-- Columna derecha: formulario -->
+      <section class="card contact-form-wrapper">
+        <h2>Envíanos un mensaje</h2>
+        <p class="muted">
+          Este formulario es una simulación para la demo del proyecto.
+        </p>
 
-        <details class="faq-item" open>
-          <summary>¿Cómo funciona la donación automática del 5%?</summary>
-          <p>
-            Cuando eliges esta opción en la tienda, el sistema calcula el 5% del
-            subtotal de tu carrito y lo suma como donación solidaria.
-          </p>
-        </details>
+        <form id="contactForm" class="contact-form">
+          <div class="form-row">
+            <label for="name">Nombre y apellido</label>
+            <input type="text" id="name" name="name" required placeholder="Ej. Ana Pérez">
+          </div>
 
-        <details class="faq-item">
-          <summary>¿Puedo elegir un monto específico para donar?</summary>
-          <p>
-            Sí, en la sección de donación puedes seleccionar "Donar un monto
-            específico" e ingresar la cantidad que deseas aportar.
-          </p>
-        </details>
+          <div class="form-row">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com">
+          </div>
 
-        <details class="faq-item">
-          <summary>¿Qué son los menús solidarios?</summary>
-          <p>
-            Son platos de comida que se financian con las donaciones. En el
-            simulador, cada menú solidario tiene un valor de S/ 5.00.
-          </p>
-        </details>
-      </aside>
+          <div class="form-row">
+            <label for="topic">¿Sobre qué quieres hablar?</label>
+            <select id="topic" name="topic">
+              <option value="pedido">Consulta sobre pedido</option>
+              <option value="donacion">Donaciones y alianzas</option>
+              <option value="soporte">Ayuda con la plataforma</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="4" required
+              placeholder="Cuéntanos en qué te ayudamos..."></textarea>
+          </div>
+
+          <div class="form-row form-row-inline">
+            <label class="checkbox-inline">
+              <input type="checkbox" id="newsletter" name="newsletter" checked>
+              Quiero recibir novedades sobre el impacto del proyecto.
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary full-width">Enviar mensaje</button>
+          <p id="contactFeedback" class="form-feedback"></p>
+        </form>
+      </section>
     </div>
   </main>
 
   <footer class="main-footer">
     <div class="container footer-grid">
       <p>&copy; 2025 Listo Solidario – Comas.</p>
-      <p>Gracias por ser parte del cambio.</p>
+      <p>Gracias por apoyar al Comedor Popular San Salvador.</p>
     </div>
   </footer>
 
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/cart.js"></script>
+  <script>
+    // FAQ acordeón
+    document.querySelectorAll('.faq-item').forEach((item) => {
+      const btn = item.querySelector('.faq-question');
+      btn.addEventListener('click', () => {
+        item.classList.toggle('open');
+      });
+    });
+
+    // Simulación envío de formulario
+    const form = document.getElementById('contactForm');
+    const feedback = document.getElementById('contactFeedback');
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        form.reset();
+        if (feedback) {
+          feedback.textContent = 'Mensaje enviado (simulado). ¡Gracias por escribirnos! 💚';
+          feedback.classList.add('form-feedback-success');
+          setTimeout(() => {
+            feedback.textContent = '';
+            feedback.classList.remove('form-feedback-success');
+          }, 4000);
+        }
+      });
+    }
+  </script>
 </body>
 </html>
