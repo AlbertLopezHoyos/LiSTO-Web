@@ -3,7 +3,8 @@
 function getCartFromStorage() {
   try {
     const data = localStorage.getItem("ls_cart");
-    return data ? JSON.parse(data) : [];
+    const parsed = data ? JSON.parse(data) : [];
+    return Array.isArray(parsed) ? parsed : [];
   } catch (e) {
     console.error("Error leyendo carrito", e);
     return [];
@@ -12,15 +13,16 @@ function getCartFromStorage() {
 
 function updateCartCount() {
   const cart = getCartFromStorage();
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
   const badge = document.getElementById("cartCount");
   if (!badge) return;
-  // animación cuando cambia
+
   const prev = parseInt(badge.textContent || "0", 10) || 0;
   badge.textContent = totalItems;
+
   if (totalItems !== prev) {
     badge.classList.remove("pulse");
-    // reflow to restart animation
+    // reflow to reiniciar la animación
     void badge.offsetWidth;
     badge.classList.add("pulse");
   }
@@ -47,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ".hero-text",
     ".hero-image img",
     ".impact-card",
-    ".contact-form",
+    ".contact-form"
   ].join(",");
 
   const toReveal = document.querySelectorAll(revealSelector);
@@ -67,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   toReveal.forEach((el) => observer.observe(el));
 
-  // Smooth anchor scrolling for in-page anchors
+  // Smooth anchor scrolling para anclas internas
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const href = a.getAttribute("href");
@@ -80,12 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Update cart count initially and on storage change
+  // Update cart count inicialmente y al cambiar localStorage
   updateCartCount();
   window.addEventListener("storage", (e) => {
     if (e.key === "ls_cart") updateCartCount();
   });
 });
 
-// Expose updateCartCount globally in case other modules call it
+// Expose updateCartCount globalmente para que cart.js lo use
 window.updateCartCount = updateCartCount;

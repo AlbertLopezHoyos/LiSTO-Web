@@ -54,8 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page;
 
   if (page === "store") {
+    // Si no hay carrito guardado, iniciamos vacío una sola vez
+    if (!localStorage.getItem(STORAGE_KEYS.CART)) {
+      saveCart([]);
+    }
+
     renderProducts();
     renderCart();
+    setupCartInteractions();
     setupDonationControls();
     setupConfirmOrder();
   }
@@ -70,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadCart() {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.CART);
-    return raw ? JSON.parse(raw) : [];
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
     return [];
   }
@@ -78,7 +85,9 @@ function loadCart() {
 
 function saveCart(cart) {
   localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
-  updateCartCount(); // de main.js
+  if (typeof window.updateCartCount === "function") {
+    window.updateCartCount(); // de main.js
+  }
 }
 
 function findProduct(id) {
@@ -205,20 +214,6 @@ function renderCart() {
     tbody.appendChild(tr);
   });
 
-  tbody.addEventListener("change", (e) => {
-    const input = e.target.closest("input[data-cart-id]");
-    if (!input) return;
-    const id = input.getAttribute("data-cart-id");
-    updateQuantity(id, input.value);
-  });
-
-  tbody.addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-remove-id]");
-    if (!btn) return;
-    const id = btn.getAttribute("data-remove-id");
-    removeFromCart(id);
-  });
-
   const subtotal = calcSubtotal(cart);
   subtotalSpan.textContent = subtotal.toFixed(2);
 
@@ -226,6 +221,29 @@ function renderCart() {
   const donation = calculateDonation(subtotal);
   donationSpan.textContent = donation.toFixed(2);
   totalSpan.textContent = (subtotal + donation).toFixed(2);
+}
+
+/* Delegación de eventos del carrito (solo se configura una vez) */
+
+function setupCartInteractions() {
+  const tbody = document.getElementById("cartItems");
+  if (!tbody) return;
+
+  // Cambio de cantidad
+  tbody.addEventListener("change", (e) => {
+    const input = e.target.closest("input[data-cart-id]");
+    if (!input) return;
+    const id = input.getAttribute("data-cart-id");
+    updateQuantity(id, input.value);
+  });
+
+  // Eliminar producto
+  tbody.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-remove-id]");
+    if (!btn) return;
+    const id = btn.getAttribute("data-remove-id");
+    removeFromCart(id);
+  });
 }
 
 /* Donación */
@@ -339,7 +357,8 @@ function setupConfirmOrder() {
 
     if (msg) {
       msg.style.color = "#0c7c59";
-      msg.textContent = "Pedido solidario registrado (simulado). Gracias por tu apoyo 💚";
+      msg.textContent =
+        "Pedido solidario registrado (simulado). Gracias por tu apoyo 💚";
     }
   });
 }
