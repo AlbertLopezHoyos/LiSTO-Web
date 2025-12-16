@@ -1679,3 +1679,280 @@ body{
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Modal Checkout (Pago + QR) ===== */
+
+.modal { 
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 9999;
+}
+
+.modal.hidden { 
+  display: none; 
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.modal-card {
+  position: relative;
+  z-index: 1;
+  width: 92%;
+  max-width: 560px;
+  margin: 6vh auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+  color: #444;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-body {
+  font-size: 14px;
+}
+
+.modal-summary {
+  background: #f9f7f2;
+  border: 1px solid #eee2cc;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.modal-summary p {
+  margin: 6px 0;
+}
+
+.pay-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pay-btn {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pay-btn:hover {
+  background: #f6f6f6;
+}
+
+.pay-btn.danger {
+  border-color: #ffb3b3;
+  background: #fff3f3;
+  color: #b00020;
+}
+
+.pay-btn.danger:hover {
+  background: #ffecec;
+}
+
+.pay-result.hidden {
+  display: none;
+}
+
+.pay-title {
+  font-weight: 800;
+  margin: 10px 0 6px;
+}
+
+.code-box {
+  display: inline-block;
+  border: 1px solid #ddd;
+  background: #f6f6f6;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin: 6px 0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+}
+
+.qr-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #ccc;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 8px 0 6px;
+}
+
+.qr-wrap img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
+
+.order-id {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.modal-actions {
+  margin-top: 12px;
+}
+
+/* Responsive simple */
+@media (max-width: 480px) {
+  .pay-options { grid-template-columns: 1fr; }
+  .qr-wrap img { width: 200px; height: 200px; }
+}
+/* ✅ Scroll interno para el modal (barra subir/bajar) */
+.modal {
+  overflow: hidden; /* evita scroll del body detrás */
+}
+
+.modal-card {
+  max-height: 86vh;      /* límite de altura del modal */
+  overflow-y: auto;      /* ✅ activa scroll vertical */
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* scroll suave en móvil */
+  padding-right: 10px;   /* espacio para la barra */
+}
+
+/* (Opcional) scrollbar más delgada en navegadores compatibles */
+.modal-card::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-card::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.25);
+  border-radius: 10px;
+}
+.modal-card::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.08);
+}
+
+/* ✅ Toast centrado */
+.center-toast {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.center-toast.hidden {
+  display: none;
+}
+
+.center-toast-card {
+  width: min(520px, 92vw);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+.center-toast-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.center-toast-card p {
+  margin: 0;
+  opacity: 0.85;
+  font-size: 14px;
+}
+
+/* ===============================
+   CARRITO: lista con scroll + botón siempre visible
+================================ */
+
+/* El aside se vuelve una "columna" */
+.store-cart{
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 140px); /* ajusta si tu header es más alto */
+  position: sticky;               /* se queda visible al hacer scroll */
+  top: 110px;                     /* ajusta según tu header */
+}
+
+/* Mensaje de carrito vacío no empuja todo */
+#emptyCartMessage{
+  margin-bottom: 10px;
+}
+
+/* La TABLA es la parte que scrollea */
+.cart-table{
+  flex: 1;               /* ocupa el espacio disponible */
+  overflow-y: auto;      /* scroll aquí */
+  display: block;
+  min-height: 120px;     /* evita que colapse */
+  max-height: 100%;
+  padding-right: 6px;    /* para que no tape el scrollbar */
+}
+
+/* Mantener encabezado visible y columnas alineadas */
+.cart-table thead,
+.cart-table tbody tr{
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.cart-table tbody{
+  display: table;
+  width: 100%;
+}
+
+/* El resumen y botón quedan abajo SIEMPRE visibles */
+.cart-summary{
+  flex-shrink: 0;
+  padding-top: 12px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  background: #fff; /* importante para que no se vea “transparente” */
+  position: sticky;
+  bottom: 0;
+}
+
+/* Scrollbar (opcional) */
+.cart-table::-webkit-scrollbar{
+  width: 6px;
+}
+.cart-table::-webkit-scrollbar-thumb{
+  background: #cfcfcf;
+  border-radius: 10px;
+}

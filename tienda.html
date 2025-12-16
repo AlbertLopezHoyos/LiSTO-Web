@@ -80,8 +80,14 @@
           <div class="donation-box">
             <h3>Elige cómo quieres donar</h3>
 
+            <!-- ✅ NO DONAR -->
             <label class="donation-option">
-              <input type="radio" name="donationMode" value="auto5" checked>
+              <input type="radio" name="donationMode" value="none" checked>
+              No deseo donar (S/ 0.00)
+            </label>
+
+            <label class="donation-option">
+              <input type="radio" name="donationMode" value="auto5">
               Donar automáticamente el 5% del total
             </label>
 
@@ -106,10 +112,13 @@
           </div>
 
           <p>Donación: <span class="amount">S/ <span id="donationAmount">0.00</span></span></p>
-          <p class="cart-total">Total a pagar: <span class="amount strong">S/ <span id="cartTotal">0.00</span></span></p>
+          <p class="cart-total">
+            Total a pagar:
+            <span class="amount strong">S/ <span id="cartTotal">0.00</span></span>
+          </p>
 
           <button id="btnConfirmOrder" class="btn-primary full-width">
-            Confirmar pedido solidario
+            Ir a pagar
           </button>
           <p id="orderMessage" class="order-message"></p>
         </div>
@@ -124,7 +133,82 @@
     </div>
   </footer>
 
+  <!-- ✅ MODAL: PAGO Y CONFIRMACIÓN -->
+  <div id="checkoutModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal="true"></div>
+
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h3 id="modalTitle">Finaliza tu pedido</h3>
+        <button class="modal-close" id="closeModalBtn" aria-label="Cerrar">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-summary">
+          <p><strong>Subtotal:</strong> S/ <span id="mSubtotal">0.00</span></p>
+          <p><strong>Donación:</strong> S/ <span id="mDonation">0.00</span></p>
+          <p><strong>Total:</strong> S/ <span id="mTotal">0.00</span></p>
+        </div>
+
+        <p style="margin-top:12px;"><strong>Elige tu método de pago:</strong></p>
+
+        <div class="pay-options">
+          <button class="pay-btn" data-pay="store">Pagar en tienda (al recoger)</button>
+          <button class="pay-btn" data-pay="cash">Efectivo (código)</button>
+          <button class="pay-btn" data-pay="yape">Yape (QR)</button>
+          <button class="pay-btn" data-pay="plin">Plin (QR)</button>
+          <button class="pay-btn danger" data-pay="cancel">Cancelar</button>
+        </div>
+
+        <div id="payResult" class="pay-result hidden">
+          <hr style="margin:14px 0;">
+          <p id="payTitle" class="pay-title"></p>
+
+          <div id="cashBox" class="hidden">
+            <p>📌 Código para pagar en efectivo:</p>
+            <div class="code-box"><span id="cashCode"></span></div>
+            <small>Presenta este código en caja (simulado).</small>
+          </div>
+
+          <div id="qrPayBox" class="hidden">
+            <p id="qrPayLabel"></p>
+            <div class="qr-wrap">
+              <img id="qrPayImg" alt="QR de pago">
+            </div>
+            <small>Escanea desde tu app (simulado).</small>
+          </div>
+
+          <div id="qrPickupBox" class="hidden">
+            <p>✅ QR para recoger tu pedido:</p>
+            <div class="qr-wrap">
+              <img id="qrPickupImg" alt="QR de recojo">
+            </div>
+            <small>Muéstralo al llegar a la tienda para retirar.</small>
+            <p class="order-id">ID de pedido: <strong id="orderIdText"></strong></p>
+          </div>
+
+          <div class="modal-actions">
+            <button id="btnFinish" class="btn-primary full-width" disabled>
+              Generar QR de recojo
+            </button>
+          </div>
+        </div>
+
+        <p id="modalMessage" class="order-message" style="margin-top:10px;"></p>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/main.js"></script>
   <script src="assets/js/cart.js"></script>
 </body>
+
+<!-- ✅ MENSAJE CENTRADO (TOAST) -->
+<div id="centerToast" class="center-toast hidden" role="status" aria-live="polite">
+  <div class="center-toast-card">
+    <h3>¡Gracias por su compra! 💚</h3>
+    <p>Tu pedido fue confirmado correctamente.</p>
+  </div>
+</div>
+
 </html>

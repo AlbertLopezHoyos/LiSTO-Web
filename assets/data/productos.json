@@ -11,7 +11,7 @@
     "name": "Pan artesanal",
     "price": 3.0,
     "description": "Pan recién horneado, ideal para el desayuno.",
-    "image": "assets/img/productos/Pan-artesanal.jpg"
+    "image": "assets/img/productos/pan-artesanal.jpg"
   },
   {
     "id": "p3",
@@ -40,5 +40,174 @@
     "price": 5.0,
     "description": "Aporta directamente a un plato solidario.",
     "image": "assets/img/productos/menu-solidario.jpg"
+  },
+
+  {
+    "id": "p7",
+    "name": "Hamburguesa clásica",
+    "price": 12.0,
+    "description": "Hamburguesa con carne, queso, lechuga y salsas.",
+    "image": "assets/img/productos/hamburguesa-clasica.jpg"
+  },
+  {
+    "id": "p8",
+    "name": "Hamburguesa doble queso",
+    "price": 16.0,
+    "description": "Doble carne, doble queso y papas al hilo.",
+    "image": "assets/img/productos/hamburguesa-doble.jpg"
+  },
+  {
+    "id": "p9",
+    "name": "Salchipapa",
+    "price": 11.0,
+    "description": "Papas crocantes con hot dog y salsas al gusto.",
+    "image": "assets/img/productos/salchipapa.jpg"
+  },
+  {
+    "id": "p10",
+    "name": "Salchipapa especial",
+    "price": 15.0,
+    "description": "Papas, hot dog, huevo y queso derretido.",
+    "image": "assets/img/productos/salchipapa-especial.jpg"
+  },
+  {
+    "id": "p11",
+    "name": "Alitas BBQ (6 unidades)",
+    "price": 18.0,
+    "description": "Alitas jugosas bañadas en salsa BBQ.",
+    "image": "assets/img/productos/alitas-bbq.jpg"
+  },
+  {
+    "id": "p12",
+    "name": "Nuggets (8 unidades)",
+    "price": 10.0,
+    "description": "Nuggets crocantes con salsa de la casa.",
+    "image": "assets/img/productos/nuggets.jpg"
+  },
+  {
+    "id": "p13",
+    "name": "Papas fritas grandes",
+    "price": 8.0,
+    "description": "Porción grande de papas fritas crocantes.",
+    "image": "assets/img/productos/papas-grandes.jpg"
+  },
+  {
+    "id": "p14",
+    "name": "Tequeños (6 unidades)",
+    "price": 12.0,
+    "description": "Tequeños rellenos de queso, doraditos.",
+    "image": "assets/img/productos/tequenos.jpg"
+  },
+  {
+    "id": "p15",
+    "name": "Chicharrón de pollo",
+    "price": 14.0,
+    "description": "Trozos de pollo crocantes con salsas.",
+    "image": "assets/img/productos/chicharron-pollo.jpg"
+  },
+  {
+    "id": "p16",
+    "name": "Sándwich de pollo",
+    "price": 10.0,
+    "description": "Sándwich con pollo, lechuga y mayonesa.",
+    "image": "assets/img/productos/sandwich-pollo.jpg"
+  },
+  {
+    "id": "p17",
+    "name": "Sándwich mixto",
+    "price": 9.0,
+    "description": "Jamón, queso, tomate y lechuga en pan suave.",
+    "image": "assets/img/productos/sandwich-mixto.jpg"
+  },
+  {
+    "id": "p18",
+    "name": "Empanada de pollo",
+    "price": 6.0,
+    "description": "Empanada horneada rellena de pollo sazonado.",
+    "image": "assets/img/productos/empanada-pollo.jpg"
+  },
+  {
+    "id": "p19",
+    "name": "Empanada de carne",
+    "price": 6.5,
+    "description": "Empanada horneada rellena de carne jugosa.",
+    "image": "assets/img/productos/empanada-carne.jpg"
+  },
+  {
+    "id": "p20",
+    "name": "Hot dog clásico",
+    "price": 7.0,
+    "description": "Hot dog con papitas al hilo y salsas.",
+    "image": "assets/img/productos/hotdog.jpg"
+  },
+  {
+    "id": "p21",
+    "name": "Nachos con queso",
+    "price": 12.0,
+    "description": "Nachos crocantes con queso derretido y jalapeños.",
+    "image": "assets/img/productos/nachos-queso.jpg"
+  },
+  {
+    "id": "p22",
+    "name": "Canchita salada",
+    "price": 4.0,
+    "description": "Canchita crujiente para acompañar.",
+    "image": "assets/img/productos/canchita.jpg"
+  },
+  {
+    "id": "p23",
+    "name": "Chifles (bolsa)",
+    "price": 5.0,
+    "description": "Chifles crocantes, perfectos para piqueo.",
+    "image": "assets/img/productos/chifles.jpg"
+  },
+  {
+    "id": "p24",
+    "name": "Gaseosa 500 ml",
+    "price": 4.0,
+    "description": "Bebida gaseosa fría para acompañar tu pedido.",
+    "image": "assets/img/productos/gaseosa-500.jpg"
+  },
+  {
+    "id": "p25",
+    "name": "Agua 600 ml",
+    "price": 2.5,
+    "description": "Agua sin gas, ideal para cualquier momento.",
+    "image": "assets/img/productos/agua-600.jpg"
+  },
+  {
+    "id": "p26",
+    "name": "Jugo natural",
+    "price": 6.0,
+    "description": "Jugo natural del día (según disponibilidad).",
+    "image": "assets/img/productos/jugo-natural.jpg"
+  },
+  {
+    "id": "p27",
+    "name": "Combo Hamburguesa + Papas + Gaseosa",
+    "price": 20.0,
+    "description": "Combo completo para una comida rápida y rica.",
+    "image": "assets/img/productos/combo-hamburguesa.jpg"
+  },
+  {
+    "id": "p28",
+    "name": "Combo Salchipapa + Gaseosa",
+    "price": 16.0,
+    "description": "Salchipapa con gaseosa fría incluida.",
+    "image": "assets/img/productos/combo-salchipapa.jpg"
+  },
+  {
+    "id": "p29",
+    "name": "Brownie",
+    "price": 5.5,
+    "description": "Brownie de chocolate suave por dentro.",
+    "image": "assets/img/productos/brownie.jpg"
+  },
+  {
+    "id": "p30",
+    "name": "Alfajor",
+    "price": 3.5,
+    "description": "Alfajor clásico con manjar blanco.",
+    "image": "assets/img/productos/alfajor.jpg"
   }
 ]
